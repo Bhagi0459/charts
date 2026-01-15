@@ -24,12 +24,7 @@ jobs:
       - name: Build application
         run: npm run build
 
-      - name: Stop existing server (if any)
+      - name: Start application server
         shell: powershell
         run: |
-          Get-Process node -ErrorAction SilentlyContinue | Stop-Process -Force
-
-      - name: Start server (background)
-        shell: powershell
-        run: |
-          Start-Process powershell -ArgumentList "serve -s dist -l 4173" -WindowStyle Hidden
+          powershell -ExecutionPolicy Bypass -File start-server.ps1
